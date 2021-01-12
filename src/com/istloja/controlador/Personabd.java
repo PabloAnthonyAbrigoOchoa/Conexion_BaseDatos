@@ -1,10 +1,14 @@
 package com.istloja.controlador;
 
 import com.istloja.modelo.Persona;
+import com.mysql.cj.xdevapi.Client;
 import java.sql.Connection;
 import java.sql.Statement;
 import conexionBaseDatos.Conexion;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Personabd {
 
@@ -22,29 +26,25 @@ public class Personabd {
             registrar = true;
             stm.close();
             con.close();
-
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-
         }
         return registrar;
 
     }
 
     public boolean actualizarPersona(Persona persona) {
-        boolean actualizar = false;
-        Statement stm = null;
-        Connection con = null;
-        String sql = "UPDATE `bdejercicio1`.`persona` SET `nombres` = 'Karen', `apellidos` = 'Ochoa', `telefono` = '998756224' WHERE (`idpersona` = '2');";
+        boolean actualizar = false;//Retorno del metodo cuando se realice la actualizacion
+        Statement stm = null;//Interfaz de acceso a la BD
+        Connection con = null;//Conexion con la BD
+        //Concatenando la opcion de actualizacion
+        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombres() + "', `apellidos` = '" + persona.getApellidos() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "' WHERE (`idpersona` = '" + persona.getIdPersona() + "');";
         try {
             Conexion conexion = new Conexion();
             con = conexion.conectarBaseDatos();
-            stm = con.createStatement();
+            stm = con.createStatement();//Puente entre la conexion y el codigo
             stm.execute(sql);
             actualizar = true;
-            stm.close();
-            con.close();
-
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -55,7 +55,8 @@ public class Personabd {
         boolean eliminar = false;
         Statement stm = null;
         Connection con = null;
-        String sql = "DELETE FROM `bdejercicio1`.`persona` WHERE (`idpersona` = '2');";
+        String sql = "DELETE FROM `bdejercicio1`.`persona` WHERE (`idpersona` = '" + String.valueOf(persona.getIdPersona()) + "');";
+        //String.valueOf para hacer castin de un valor Entero a un String
         try {
             Conexion conexion = new Conexion();
             con = conexion.conectarBaseDatos();
@@ -64,10 +65,41 @@ public class Personabd {
             eliminar = true;
             stm.close();
             con.close();
-
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
         return eliminar;
+    }
+
+    public List<Persona> obtenerPersonas() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;//Sentencia del JDBC para obtener valores de la BD
+        String sql = "SELECT * FROM bdejercicio1.persona;";
+        List<Persona> listaPersonas = new ArrayList<Persona>();
+        try {
+            con = new Conexion().conectarBaseDatos();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Persona c = new Persona();
+                c.setIdPersona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombres(rs.getString(3));
+                c.setApellidos(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getInt(7));
+                listaPersonas.add(c);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+
+        return listaPersonas;
+
     }
 }
