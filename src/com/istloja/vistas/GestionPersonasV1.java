@@ -1,9 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.istloja.vistas;
+
+import com.istloja.controlador.Personabd;
+import com.istloja.modelo.Persona;
+import com.istloja.utilidad.Utilidades;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,12 +11,16 @@ package com.istloja.vistas;
  */
 public class GestionPersonasV1 extends javax.swing.JFrame {
 
+    private Utilidades utilidades;
+    private Personabd controladorPersona;
+
     /**
      * Creates new form GestionPersonasV1
      */
     public GestionPersonasV1() {
         initComponents();
-      
+        utilidades = new Utilidades();
+        controladorPersona = new Personabd();
     }
 
     /**
@@ -66,18 +70,6 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         lbTelefono.setText("Teléfono:");
 
         lbCorreo.setText("Correo:");
-
-        txtCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedulaActionPerformed(evt);
-            }
-        });
-
-        txtNombres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombresActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelCuerpoRegistroLayout = new javax.swing.GroupLayout(panelCuerpoRegistro);
         panelCuerpoRegistro.setLayout(panelCuerpoRegistroLayout);
@@ -202,40 +194,81 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombresActionPerformed
-
-    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+
+        if (txtCedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El campo Cédula no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtCedula.requestFocus();//Sirve para ubicar el cursor en un campo vacio
+            return;
+        }
+        if (!utilidades.validadorDeCedula(txtCedula.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "La cédula ingresada no es valida.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (txtNombres.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El campo Nombres no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNombres.requestFocus();
+            return;
+        }
+        if (txtApellidos.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El campo Apellidos no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtApellidos.requestFocus();
+            return;
+        }
+        if (txtDireccion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El campo Dirección no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtDireccion.requestFocus();
+            return;
+        }
+        if (txtTelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El campo Telefono no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtTelefono.requestFocus();
+            return;
+        }
+        if (!utilidades.validarNumero(txtTelefono.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados en el telefono no son validos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtTelefono.requestFocus();
+            return;
+
+        }
+        if (txtCorreo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El campo Correo no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtCorreo.requestFocus();
+            return;
+        }
+
+//        if (!utilidades.validarCorreo(txtCorreo.getText())) {
+//            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados en el correo no son validos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+//            txtCorreo.requestFocus();
+//            return;
+//        }
+        //Eh comentado el metodo por cuestion de comprobacion a la hora de la ejecucion//
+
+        Persona persona = new Persona();
+        persona.setCedula(txtCedula.getText());
+        persona.setNombres(txtNombres.getText());
+        persona.setApellidos(txtApellidos.getText());
+        persona.setDireccion(txtDireccion.getText());
+        persona.setCorreo(txtCorreo.getText());
+        persona.setTelefono(txtTelefono.getText());
         String datoCedula = txtCedula.getText();
-        String datoNombre = txtNombres.getText();
-        String datoApellido = txtApellidos.getText();
-        String datoDireccion = txtDireccion.getText();
-        String datoTelefono = txtTelefono.getText();
-        String datoCorreo = txtCorreo.getText();
-        System.out.println(datoCedula);
-        System.out.println(datoNombre);
-        System.out.println(datoApellido);
-        System.out.println(datoDireccion);
-        System.out.println(datoTelefono);
-        System.out.println(datoCorreo);
-         
+        System.out.println(persona.toString());
+        if (controladorPersona.registrarPersona(persona)) {
+            JOptionPane.showMessageDialog(rootPane, "Persona registrada en el Sistema");
+            txtCedula.setText("");
+            txtNombres.setText("");
+            txtApellidos.setText("");
+            txtDireccion.setText("");
+            txtTelefono.setText("");
+            txtCorreo.setText("");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se puede guardar la persona.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -261,6 +294,7 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;

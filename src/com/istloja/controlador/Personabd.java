@@ -1,7 +1,6 @@
 package com.istloja.controlador;
 
 import com.istloja.modelo.Persona;
-import com.mysql.cj.xdevapi.Client;
 import java.sql.Connection;
 import java.sql.Statement;
 import conexionBaseDatos.Conexion;
@@ -89,7 +88,7 @@ public class Personabd {
                 c.setApellidos(rs.getString(4));
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
-                c.setTelefono(rs.getInt(7));
+                c.setTelefono(rs.getString(7));
                 listaPersonas.add(c);
             }
             stm.close();
