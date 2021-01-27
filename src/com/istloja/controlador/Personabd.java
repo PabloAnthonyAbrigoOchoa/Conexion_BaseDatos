@@ -101,4 +101,32 @@ public class Personabd {
         return listaPersonas;
 
     }
+
+    public Persona buscarPersona() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;//Sentencia del JDBC para obtener valores de la BD
+        String sql = "SELECT * FROM bdejercicio1.persona;";
+        try {
+            con = new Conexion().conectarBaseDatos();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Persona c = new Persona();
+                c.setIdPersona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombres(rs.getString(3));
+                c.setApellidos(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return buscarPersona();
+    }
 }

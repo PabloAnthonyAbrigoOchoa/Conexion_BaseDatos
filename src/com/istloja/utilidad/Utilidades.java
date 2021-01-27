@@ -9,8 +9,8 @@ public class Utilidades {
             {
                 int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
                 if (tercerDigito < 6) {
-// Coeficientes de validación cédula
-// El decimo digito se lo considera dígito verificador
+    // Coeficientes de validación cédula
+    // El decimo digito se lo considera dígito verificador
                     int[] coefValCedula = {2, 1, 2, 1, 2, 1, 2, 1, 2};
                     int verificador = Integer.parseInt(cedula.substring(9, 10));
                     int suma = 0;
@@ -46,7 +46,12 @@ public class Utilidades {
         return cedulaCorrecta;
     }
 
+    //Metodo para validar los numeros de cedula de las personas.
     public boolean validarNumero(String numero) {
+        //Coleccion caracteres
+        if (numero.charAt(0) != '0') {
+            return false;
+        }
         if (numero.isEmpty()) {
             return false;
         } else if (numero.length() < 10) {
@@ -60,25 +65,14 @@ public class Utilidades {
         }
 
     }
-
+    //Metodo para validar la correo electronico
     public boolean validarCorreo(String correo) {
-        int longitud = correo.length();
-        char valor;
-        for (char i = 0; i < longitud; i++) {
-            valor = correo.charAt(i);
-            if (valor == '@' && i == 0) {
-                System.out.println("El correo no es correcto");
-                break;
-            }
-            if (valor == '@') {
-                System.out.println("Escribiste perfectamente el correo");
-                break;
-            } else if (i == longitud - 1) {
-                System.out.println("El correo está mal, tiene que contener @ ");
-                break;
+        for (int i = 0; i < correo.length(); i++) {
+            System.out.println(correo.charAt(i));
+            if (correo.charAt(i) == '@') {
+                return true;
             }
         }
         return false;
     }
-
 }
