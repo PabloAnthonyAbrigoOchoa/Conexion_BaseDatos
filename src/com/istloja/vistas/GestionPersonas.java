@@ -1,56 +1,158 @@
 package com.istloja.vistas;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.JButton;
+import com.istloja.modelo.Persona;
+import com.istloja.utilidad.Utilidades;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class GestionPersonas extends JFrame {
+public class GestionPersonas {
 
-    private JPanel Panel = new JPanel();
+    private JTextField txtCedula;
+    private JTextField txtNombres;
+    private JTextField txtApellidos;
+    private JTextField txtDireccion;
+    private JTextField txtTelefono;
+    private JTextField txtCorreo;
+    private Utilidades utilidades;
+    private JFrame frameGestionContable;
 
-    private JPanel PanelTitulo = new JPanel();
-    private JPanel PanelCuerpo = new JPanel();
-    private JPanel PanelBotones = new JPanel();
-
-    public GestionPersonas() {
-        this.show();//Mostrar pantalla
-        this.setTitle("FORMULARIO");//Titulo de la pantalla
-        this.setSize(470, 350);//Tamaño inicial de la pantalla
-        Panel.setLayout(new FlowLayout());//Se agrego un Layout encargado de distribuir los componentes
-        JLabel Tlabel = new JLabel("REGISTRO DE PERSONAS");
-        PanelTitulo.add(Tlabel);
-        Panel.add(PanelTitulo);
-        Panel.add(Tlabel);
-        PanelCuerpo.setLayout(new GridLayout(6, 2));
-        PanelCuerpo.add(new JLabel("Cédula  : "));
-        PanelCuerpo.add(new JTextField("1106049925"));
-        PanelCuerpo.add(new JLabel("Nombres  :"));
-        PanelCuerpo.add(new JTextField("Pablo Anthony"));
-        PanelCuerpo.add(new JLabel("Apellidos  :"));
-        PanelCuerpo.add(new JTextField("Abrigo Ochoa"));
-        PanelCuerpo.add(new JLabel("Dirección  :"));
-        PanelCuerpo.add(new JTextField("Ciudad Victoria"));
-        PanelCuerpo.add(new JLabel("Correo  :"));
-        PanelCuerpo.add(new JTextField("pabloochoa518@gmail.com"));
-        PanelCuerpo.add(new JLabel("Teléfono  :"));
-        PanelCuerpo.add(new JTextField("0994941403"));
-        Panel.add(PanelCuerpo);
-        this.add(PanelCuerpo);
-        PanelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        PanelBotones.add(new JButton("ACEPTAR"));
-        PanelBotones.add(new JButton("EDITAR"));
-        PanelBotones.add(new JButton("ELIMINAR"));
-        PanelBotones.add(new JButton("TRAER ÚLTIMO REGISTRO"));
-        Panel.add(PanelBotones);
-        this.add(PanelBotones);
-        this.setLocationRelativeTo(null);//Centrar la Pantalla
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Cerrar o dar fin al Programa
+    public GestionPersonas(JTextField txtCedula, JTextField txtNombres, JTextField txtApellidos, JTextField txtDireccion, JTextField txtTelefono, JTextField txtCorreo, Utilidades utilidades, JFrame frameGestionContable) {
+        this.txtCedula = txtCedula;
+        this.txtNombres = txtNombres;
+        this.txtApellidos = txtApellidos;
+        this.txtDireccion = txtDireccion;
+        this.txtTelefono = txtTelefono;
+        this.txtCorreo = txtCorreo;
+        this.utilidades = utilidades;
+        this.frameGestionContable = frameGestionContable;
     }
-//////////INTENTE VARIAS MANERAS DE RESOLVER EL PROBLEMA Y PERSISTE INGENIERO AHI ME MUESTRA SOLO LOS BOTONES Y ESTAN TODOS AGREGADOS CON SUS PANELES NO ENTIENDO POR QUE NO SE PRESENTAN EN PANTALLA EL RESTO 
-    
-    
-}
+
+    public JTextField getTxtCedula() {
+        return txtCedula;
+    }
+
+    public void setTxtCedula(JTextField txtCedula) {
+        this.txtCedula = txtCedula;
+    }
+
+    public JTextField getTxtNombres() {
+        return txtNombres;
+    }
+
+    public void setTxtNombres(JTextField txtNombres) {
+        this.txtNombres = txtNombres;
+    }
+
+    public JTextField getTxtApellidos() {
+        return txtApellidos;
+    }
+
+    public void setTxtApellidos(JTextField txtApellidos) {
+        this.txtApellidos = txtApellidos;
+    }
+
+    public JTextField getTxtDireccion() {
+        return txtDireccion;
+    }
+
+    public void setTxtDireccion(JTextField txtDireccion) {
+        this.txtDireccion = txtDireccion;
+    }
+
+    public JTextField getTxtTelefono() {
+        return txtTelefono;
+    }
+
+    public void setTxtTelefono(JTextField txtTelefono) {
+        this.txtTelefono = txtTelefono;
+    }
+
+    public JTextField getTxtCorreo() {
+        return txtCorreo;
+    }
+
+    public void setTxtCorreo(JTextField txtCorreo) {
+        this.txtCorreo = txtCorreo;
+    }
+
+    public void limpiarCamposPersona() {
+        txtCedula.setText("");
+        txtNombres.setText("");
+        txtApellidos.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtCedula.requestFocus();
+    }
+
+    public Persona guardarEditar() {
+        if (txtCedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Cédula no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtCedula.requestFocus();//Sirve para ubicar el cursor en un campo vacio
+            return null;
+        }
+        if (!utilidades.validadorDeCedula(txtCedula.getText())) {
+            JOptionPane.showMessageDialog(frameGestionContable, "La cédula ingresada no es valida.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        if (txtNombres.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Nombres no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNombres.requestFocus();
+            return null;
+        }
+        if (txtApellidos.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Apellidos no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtApellidos.requestFocus();
+            return null;
+        }
+        if (txtDireccion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Dirección no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtDireccion.requestFocus();
+            return null;
+        }
+        if (txtTelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Telefono no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtTelefono.requestFocus();
+            return null;
+        }
+        if (!utilidades.validarNumero(txtTelefono.getText())) {
+            JOptionPane.showMessageDialog(frameGestionContable, "Los datos ingresados en el telefono no son validos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtTelefono.requestFocus();
+            return null;
+
+        }
+        if (txtCorreo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Correo no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtCorreo.requestFocus();
+            return null;
+        }
+        if (!utilidades.validarCorreo(txtCorreo.getText())) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El correo ingresado no es valido.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtCorreo.requestFocus();
+            return null;
+        }
+        Persona persona = new Persona();
+        persona.setCedula(txtCedula.getText());
+        persona.setNombres(txtNombres.getText());
+        persona.setApellidos(txtApellidos.getText());
+        persona.setDireccion(txtDireccion.getText());
+        persona.setCorreo(txtCorreo.getText());
+        persona.setTelefono(txtTelefono.getText());
+        return persona;
+       }
+    }
+        
+
+
+
+
+
+
+
+
+
+
+
+        
+

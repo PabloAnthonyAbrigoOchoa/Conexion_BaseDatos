@@ -10,19 +10,21 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class GestionPersonasV1 extends javax.swing.JFrame {
+public class GestionContable extends javax.swing.JFrame {
 
     private Utilidades utilidades;
     private Personabd controladorPersona;
     private Persona personaEditarEliminar;
+    private GestionPersonas gestionPersona;
 
     /**
      * Creates new form GestionPersonasV1
      */
-    public GestionPersonasV1() {
+    public GestionContable() {
         initComponents();
         utilidades = new Utilidades();
         controladorPersona = new Personabd();
+        gestionPersona = new GestionPersonas(txtCedula, txtNombres, txtApellidos, txtDireccion, txtTelefono, txtCorreo, utilidades, this);
     }
 
     /**
@@ -34,7 +36,14 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtTitulo = new javax.swing.JLabel();
+        tabGeneral = new javax.swing.JTabbedPane();
+        panelCliente = new javax.swing.JPanel();
+        txtTituloCliente = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnTraer = new javax.swing.JButton();
+        btnLimpiarCampos = new javax.swing.JButton();
         panelCuerpoRegistro = new javax.swing.JPanel();
         lbCedula = new javax.swing.JLabel();
         lbNombre = new javax.swing.JLabel();
@@ -51,11 +60,18 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         btnBuscarCedula = new javax.swing.JButton();
         btnBuscarApellido = new javax.swing.JButton();
         btnBuscarTelefono = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnTraer = new javax.swing.JButton();
-        btnLimpiarCampos = new javax.swing.JButton();
+        jScrollCliente = new javax.swing.JScrollPane();
+        tablaCliente = new javax.swing.JTable();
+        lblBuscarCliente = new javax.swing.JLabel();
+        comboParametroBusqueda = new javax.swing.JComboBox<>();
+        txtParametroBusqueda = new javax.swing.JTextField();
+        btnBuscarPersona = new javax.swing.JButton();
+        panelProveedores = new javax.swing.JPanel();
+        txtTituloProveedor = new javax.swing.JLabel();
+        panelInventario = new javax.swing.JPanel();
+        txtTituloInventario = new javax.swing.JLabel();
+        panelVenta = new javax.swing.JPanel();
+        txtTituloVenta = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
@@ -67,8 +83,43 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        txtTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtTitulo.setText("Registro de Personas");
+        txtTituloCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTituloCliente.setText("Registro de Personas");
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnTraer.setText("Traer");
+        btnTraer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraerActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarCampos.setText("Limpiar Formulario");
+        btnLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarCamposActionPerformed(evt);
+            }
+        });
 
         panelCuerpoRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder("Cuerpo Registro"));
 
@@ -163,7 +214,7 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,40 +235,155 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+        tablaCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        jScrollCliente.setViewportView(tablaCliente);
 
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
+        lblBuscarCliente.setText("Buscar Cliente");
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
+        comboParametroBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cédula", "Nombres", "Apellidos", "Teléfono", "Correo" }));
 
-        btnTraer.setText("Traer");
-        btnTraer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTraerActionPerformed(evt);
-            }
-        });
+        btnBuscarPersona.setText("Buscar");
 
-        btnLimpiarCampos.setText("Limpiar Formulario");
-        btnLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarCamposActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout panelClienteLayout = new javax.swing.GroupLayout(panelCliente);
+        panelCliente.setLayout(panelClienteLayout);
+        panelClienteLayout.setHorizontalGroup(
+            panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClienteLayout.createSequentialGroup()
+                .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelClienteLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(txtTituloCliente))
+                    .addGroup(panelClienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelClienteLayout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(btnGuardar)
+                                .addGap(53, 53, 53)
+                                .addComponent(btnEditar)
+                                .addGap(46, 46, 46)
+                                .addComponent(btnEliminar)
+                                .addGap(53, 53, 53)
+                                .addComponent(btnTraer)
+                                .addGap(43, 43, 43)
+                                .addComponent(btnLimpiarCampos))))
+                    .addGroup(panelClienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelClienteLayout.createSequentialGroup()
+                                .addComponent(lblBuscarCliente)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboParametroBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtParametroBusqueda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        panelClienteLayout.setVerticalGroup(
+            panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTituloCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnTraer)
+                    .addComponent(btnLimpiarCampos))
+                .addGap(20, 20, 20)
+                .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBuscarCliente)
+                    .addComponent(comboParametroBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtParametroBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarPersona))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
+        );
+
+        tabGeneral.addTab("Clientes", panelCliente);
+
+        txtTituloProveedor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTituloProveedor.setText("Registro de Proveedores");
+
+        javax.swing.GroupLayout panelProveedoresLayout = new javax.swing.GroupLayout(panelProveedores);
+        panelProveedores.setLayout(panelProveedoresLayout);
+        panelProveedoresLayout.setHorizontalGroup(
+            panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProveedoresLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(txtTituloProveedor)
+                .addContainerGap(496, Short.MAX_VALUE))
+        );
+        panelProveedoresLayout.setVerticalGroup(
+            panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProveedoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTituloProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(776, Short.MAX_VALUE))
+        );
+
+        tabGeneral.addTab("Proveedores", panelProveedores);
+
+        txtTituloInventario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTituloInventario.setText("Registro de Inventario");
+
+        javax.swing.GroupLayout panelInventarioLayout = new javax.swing.GroupLayout(panelInventario);
+        panelInventario.setLayout(panelInventarioLayout);
+        panelInventarioLayout.setHorizontalGroup(
+            panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInventarioLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(txtTituloInventario)
+                .addContainerGap(512, Short.MAX_VALUE))
+        );
+        panelInventarioLayout.setVerticalGroup(
+            panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInventarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTituloInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(776, Short.MAX_VALUE))
+        );
+
+        tabGeneral.addTab("Inventario", panelInventario);
+
+        txtTituloVenta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTituloVenta.setText("Registro de Venta");
+
+        javax.swing.GroupLayout panelVentaLayout = new javax.swing.GroupLayout(panelVenta);
+        panelVenta.setLayout(panelVentaLayout);
+        panelVentaLayout.setHorizontalGroup(
+            panelVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVentaLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(txtTituloVenta)
+                .addContainerGap(547, Short.MAX_VALUE))
+        );
+        panelVentaLayout.setVerticalGroup(
+            panelVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVentaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTituloVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(776, Short.MAX_VALUE))
+        );
+
+        tabGeneral.addTab("Ventas", panelVenta);
 
         menuArchivo.setText("Archivo");
 
@@ -257,41 +423,14 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(btnGuardar)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnEditar)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnEliminar)
-                        .addGap(56, 56, 56)
-                        .addComponent(btnTraer)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnLimpiarCampos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(txtTitulo)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(tabGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnTraer)
-                    .addComponent(btnLimpiarCampos))
-                .addGap(17, 17, 17))
+                .addComponent(tabGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 76, Short.MAX_VALUE))
         );
 
         pack();
@@ -301,11 +440,11 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         if (controladorPersona.getPersonaCedula(txtCedula.getText()) != null) {
             JOptionPane.showMessageDialog(rootPane, "La persona con ese número de cédula ya se encuentra registrada en el sistema.");
         } else {
-            Persona personaGuardar = guardarEditar();
+            Persona personaGuardar = gestionPersona.guardarEditar();
             if (personaGuardar != null) {
                 if (controladorPersona.registrarPersona(personaGuardar)) {
                     JOptionPane.showMessageDialog(rootPane, "Persona registrada en el Sistema");
-                    limpiarCampos();
+                    gestionPersona.limpiarCamposPersona();
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "No se puede guardar la persona.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
@@ -313,78 +452,15 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         }
     }
 
-    public Persona guardarEditar() {
-        if (txtCedula.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo Cédula no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtCedula.requestFocus();//Sirve para ubicar el cursor en un campo vacio
-            return null;
-        }
-        if (!utilidades.validadorDeCedula(txtCedula.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "La cédula ingresada no es valida.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-        if (txtNombres.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo Nombres no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtNombres.requestFocus();
-            return null;
-        }
-        if (txtApellidos.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo Apellidos no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtApellidos.requestFocus();
-            return null;
-        }
-        if (txtDireccion.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo Dirección no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtDireccion.requestFocus();
-            return null;
-        }
-        if (txtTelefono.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo Telefono no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtTelefono.requestFocus();
-            return null;
-        }
-        if (!utilidades.validarNumero(txtTelefono.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados en el telefono no son validos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtTelefono.requestFocus();
-            return null;
-
-        }
-        if (txtCorreo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo Correo no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtCorreo.requestFocus();
-            return null;
-        }
-        if (!utilidades.validarCorreo(txtCorreo.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "El correo ingresado no es valido.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtCorreo.requestFocus();
-            return null;
-        }
-
-        Persona persona = new Persona();
-        persona.setCedula(txtCedula.getText());
-        persona.setNombres(txtNombres.getText());
-        persona.setApellidos(txtApellidos.getText());
-        persona.setDireccion(txtDireccion.getText());
-        persona.setCorreo(txtCorreo.getText());
-        persona.setTelefono(txtTelefono.getText());
-
-        if (controladorPersona.registrarPersona(persona)) {
-            JOptionPane.showMessageDialog(rootPane, "Persona registrada en el Sistema");
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "No se puede guardar la persona.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        return persona;
-    }
-
     //Metodo para limpiar todos los campos.
-    public void limpiarCampos() {
+    public void limpiarCamposPersona() {
         txtCedula.setText("");
         txtNombres.setText("");
         txtApellidos.setText("");
         txtDireccion.setText("");
         txtTelefono.setText("");
         txtCorreo.setText("");
+        txtCedula.requestFocus();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -393,13 +469,15 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "No hay una persona seleccionada para editar.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Persona personaEditarLocal = guardarEditar();
+        Persona personaEditarLocal = gestionPersona.guardarEditar();
         if (personaEditarLocal != null) {
             personaEditarLocal.setIdPersona(personaEditarEliminar.getIdPersona());
             controladorPersona.actualizarPersona(personaEditarLocal);
             JOptionPane.showMessageDialog(rootPane, "Persona editada con exito del sistema.");
-            limpiarCampos();
+            gestionPersona.limpiarCamposPersona();
             personaEditarEliminar = null;
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se puede editar la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -472,7 +550,7 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
         if (personaEditarEliminar != null) {
             if (controladorPersona.eliminarPersona(personaEditarEliminar)) {
                 JOptionPane.showMessageDialog(rootPane, "Persona eliminada con éxito del sistema.");
-                limpiarCampos();
+                gestionPersona.limpiarCamposPersona();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "No se puede eliminar la persona seleccionada.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -483,7 +561,7 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
 
     private void btnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCamposActionPerformed
         // TODO add your handling code here:
-        limpiarCampos();
+        gestionPersona.limpiarCamposPersona();
     }//GEN-LAST:event_btnLimpiarCamposActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
@@ -505,20 +583,21 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionPersonasV1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionContable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionPersonasV1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionContable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionPersonasV1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionContable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionPersonasV1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionContable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionPersonasV1().setVisible(true);
+                new GestionContable().setVisible(true);
             }
         });
     }
@@ -527,32 +606,46 @@ public class GestionPersonasV1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarApellido;
     private javax.swing.JButton btnBuscarCedula;
+    private javax.swing.JButton btnBuscarPersona;
     private javax.swing.JButton btnBuscarTelefono;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiarCampos;
     private javax.swing.JButton btnTraer;
+    private javax.swing.JComboBox<String> comboParametroBusqueda;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollCliente;
     private javax.swing.JLabel lbApellido;
     private javax.swing.JLabel lbCedula;
     private javax.swing.JLabel lbCorreo;
     private javax.swing.JLabel lbDireccion;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbTelefono;
+    private javax.swing.JLabel lblBuscarCliente;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenuItem menuBuscarPersonas;
     private javax.swing.JMenu menuEditar;
     private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JPanel panelCliente;
     private javax.swing.JPanel panelCuerpoRegistro;
+    private javax.swing.JPanel panelInventario;
+    private javax.swing.JPanel panelProveedores;
+    private javax.swing.JPanel panelVenta;
+    private javax.swing.JTabbedPane tabGeneral;
+    private javax.swing.JTable tablaCliente;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtParametroBusqueda;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JLabel txtTitulo;
+    private javax.swing.JLabel txtTituloCliente;
+    private javax.swing.JLabel txtTituloInventario;
+    private javax.swing.JLabel txtTituloProveedor;
+    private javax.swing.JLabel txtTituloVenta;
     // End of variables declaration//GEN-END:variables
 }

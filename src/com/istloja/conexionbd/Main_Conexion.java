@@ -28,7 +28,7 @@ public class Main_Conexion {
 //        } else {
 //            System.out.println("Error al eliminar los datos");
 //        }
-          GestionPersonas gestionPersona = new GestionPersonas();
+//          GestionPersonas gestionPersona = new GestionPersonas();
     }
     
 
