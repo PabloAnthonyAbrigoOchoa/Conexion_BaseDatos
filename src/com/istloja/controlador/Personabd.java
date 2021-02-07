@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Gestion entre la base de datos y el modelo que se tiene implentado en java
 public class Personabd {
     //Registrar persona en la Base de Datos
     public boolean registrarPersona(Persona persona) {
@@ -136,7 +137,7 @@ public class Personabd {
         Statement stm = null;
         ResultSet rs = null;//Sentencia del JDBC para obtener valores de la BD
         Persona a = null;
-        String sql = "SELECT * FROM bdejercicio1.persona where apellido like "+apellidos+"";
+        String sql = "SELECT * FROM bdejercicio1.persona where apellidos like '"+apellidos+"';";
         try {
             con = new Conexion().conectarBaseDatos();
             stm = con.createStatement();
