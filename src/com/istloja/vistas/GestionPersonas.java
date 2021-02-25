@@ -143,16 +143,5 @@ public class GestionPersonas {
        }
     }
         
-
-
-
-
-
-
-
-
-
-
-
         
 

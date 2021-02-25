@@ -1,8 +1,11 @@
 package com.istloja.vistas;
 
 import com.istloja.controlador.Personabd;
+import com.istloja.modelTablas.ComunicacionPersona;
+import com.istloja.modelTablas.ModelTablePersona;
 import com.istloja.modelo.Persona;
 import com.istloja.utilidad.Utilidades;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -10,20 +13,23 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class GestionContable extends javax.swing.JFrame {
-
+public class GestionContable extends javax.swing.JFrame implements ComunicacionPersona {
+    
     private Utilidades utilidades;
     private Personabd controladorPersona;
     private Persona personaEditarEliminar;
     private GestionPersonas gestionPersona;
+    private ModelTablePersona modelTablePersona;
+    private String persona;
 
     /**
      * Creates new form GestionPersonasV1
      */
     public GestionContable() {
+        controladorPersona = new Personabd();
+        modelTablePersona = new ModelTablePersona(controladorPersona.obtenerPersonas(), this);
         initComponents();
         utilidades = new Utilidades();
-        controladorPersona = new Personabd();
         gestionPersona = new GestionPersonas(txtCedula, txtNombres, txtApellidos, txtDireccion, txtTelefono, txtCorreo, utilidades, this);
     }
 
@@ -235,17 +241,7 @@ public class GestionContable extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        tablaCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tablaCliente.setModel(modelTablePersona);
         jScrollCliente.setViewportView(tablaCliente);
 
         lblBuscarCliente.setText("Buscar Cliente");
@@ -253,6 +249,11 @@ public class GestionContable extends javax.swing.JFrame {
         comboParametroBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cédula", "Nombres", "Apellidos", "Teléfono", "Correo" }));
 
         btnBuscarPersona.setText("Buscar");
+        btnBuscarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarPersonaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelClienteLayout = new javax.swing.GroupLayout(panelCliente);
         panelCliente.setLayout(panelClienteLayout);
@@ -424,7 +425,7 @@ public class GestionContable extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tabGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +465,7 @@ public class GestionContable extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        
         if (personaEditarEliminar == null) {
             JOptionPane.showMessageDialog(rootPane, "No hay una persona seleccionada para editar.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
@@ -472,12 +473,13 @@ public class GestionContable extends javax.swing.JFrame {
         Persona personaEditarLocal = gestionPersona.guardarEditar();
         if (personaEditarLocal != null) {
             personaEditarLocal.setIdPersona(personaEditarEliminar.getIdPersona());
-            controladorPersona.actualizarPersona(personaEditarLocal);
-            JOptionPane.showMessageDialog(rootPane, "Persona editada con exito del sistema.");
-            gestionPersona.limpiarCamposPersona();
-            personaEditarEliminar = null;
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "No se puede editar la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
+            if (controladorPersona.actualizarPersona(personaEditarLocal)) {
+                JOptionPane.showMessageDialog(rootPane, "Persona editada con exito del sitema.");
+                gestionPersona.limpiarCamposPersona();
+                personaEditarEliminar = null;
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No se puede editar la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -532,6 +534,7 @@ public class GestionContable extends javax.swing.JFrame {
     private void btnBuscarTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTelefonoActionPerformed
         // TODO add your handling code here:
         Persona persona = controladorPersona.getBuscarTelefono(txtTelefono.getText());
+        personaEditarEliminar = persona;
         if (persona != null) {
             txtNombres.setText(persona.getNombres());
             txtApellidos.setText(persona.getApellidos());
@@ -546,11 +549,12 @@ public class GestionContable extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarTelefonoActionPerformed
     //Eliminar un apersona de la Base de Datos
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        
         if (personaEditarEliminar != null) {
             if (controladorPersona.eliminarPersona(personaEditarEliminar)) {
                 JOptionPane.showMessageDialog(rootPane, "Persona eliminada con éxito del sistema.");
                 gestionPersona.limpiarCamposPersona();
+                personaEditarEliminar = null;
             } else {
                 JOptionPane.showMessageDialog(rootPane, "No se puede eliminar la persona seleccionada.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -574,6 +578,18 @@ public class GestionContable extends javax.swing.JFrame {
         buscarPersonaPorCedula();
     }//GEN-LAST:event_menuBuscarPersonasActionPerformed
 
+    private void btnBuscarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPersonaActionPerformed
+        // TODO add your handling code here:
+//        List<Persona> personas= new ArrayList<>();
+//        personas.add(controladorPersona.getPersonaCedula(txtParametroBusqueda.getText()));
+//        modelTablePersona.setPersonas(personas);
+//        modelTablePersona.fireTableDataChanged();//Actualizar los datos que se encuentran en el modelo.
+
+          List<Persona> personaNombre =controladorPersona.getPersonaNombre(txtParametroBusqueda.getText());
+          modelTablePersona.setPersonas(personaNombre);
+          modelTablePersona.fireTableDataChanged();
+    }//GEN-LAST:event_btnBuscarPersonaActionPerformed
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -648,4 +664,17 @@ public class GestionContable extends javax.swing.JFrame {
     private javax.swing.JLabel txtTituloProveedor;
     private javax.swing.JLabel txtTituloVenta;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void clickPersona(Persona p) {
+        System.out.println("Persona" + p.toString());
+        txtCedula.setText(p.getCedula());
+        txtNombres.setText(p.getNombres());
+        txtApellidos.setText(p.getApellidos());
+        txtDireccion.setText(p.getDireccion());
+        txtCorreo.setText(p.getCorreo());
+        txtTelefono.setText(p.getTelefono());
+        personaEditarEliminar = p;
+    }
+    
 }

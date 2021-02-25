@@ -189,4 +189,36 @@ public class Personabd {
         }
         return t;
     }
+    
+     //Metodo para buscar personas por nombre
+    public List<Persona> getPersonaNombre(String nombre) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;//Sentencia del JDBC para obtener valores de la BD
+        List<Persona> personasEncontradas = new ArrayList<>();
+        String parametroBusqueda = "%"+nombre+"%";
+        String sql = "SELECT * FROM bdejercicio1.persona where nombres like \"%"+nombre+"%\"";
+        try {
+            con = new Conexion().conectarBaseDatos();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Persona c = new Persona();
+                c.setIdPersona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombres(rs.getString(3));
+                c.setApellidos(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                personasEncontradas.add(c);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return personasEncontradas;
+    }
 }
