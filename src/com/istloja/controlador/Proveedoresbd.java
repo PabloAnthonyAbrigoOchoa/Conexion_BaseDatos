@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Proveedoresdb {
+public class Proveedoresbd {
 
     public boolean registrarProveedor(Proveedores proveedor) {
         boolean registrar = false;
@@ -32,7 +32,7 @@ public class Proveedoresdb {
 
     }
 
-    //Actualizar persona en la Base de Datos
+    //Actualizar proveedor en la Base de Datos
     public boolean actualizarProveedor(Proveedores proveedor) {
         boolean actualizar = false;//Retorno del metodo cuando se realice la actualizacion
         Statement stm = null;//Interfaz de acceso a la BD
@@ -51,7 +51,7 @@ public class Proveedoresdb {
         return actualizar;
     }
 
-    //Eliminar una persona en al ID de la persona seleccionada de la Base de Datos
+    //Eliminar una proveedor en al ID de la persona seleccionada de la Base de Datos
     public boolean eliminarProveedor(Proveedores proveedor) {
         boolean eliminar = false;
         Statement stm = null;
