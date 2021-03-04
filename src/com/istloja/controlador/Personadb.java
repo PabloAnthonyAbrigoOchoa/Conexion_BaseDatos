@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Gestion entre la base de datos y el modelo que se tiene implentado en java
-public class Personabd {
+public class Personadb {
     //Registrar persona en la Base de Datos
     public boolean registrarPersona(Persona persona) {
         boolean registrar = false;

@@ -1,7 +1,6 @@
 package com.istloja.modelTablas;
 
 import com.istloja.modelo.Inventario;
-import com.istloja.modelo.Proveedores;
 import com.istloja.vistas.GestionContable;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -9,19 +8,19 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTableInventario extends AbstractTableModel {
 
     //Arreglo con el nombre de las columnas.
-    private String[] m_colNames = {"CÓDIGO PRO", "DESCRIPCIÓN", "PRECIOS COMPRA", "PRECIO VENTA", "CAN PRODUCTOS"};
-    private List<Inventario> inventario;
-    private GestionContable gContable;
+    private String[] m_colNames = {"COD PRODUCTO", "DESCRIPCIÓN", "PRECIO COMPRA", "PRECIO VENTA", "CAN PRODUCTOS"};
+    private List<Inventario> inventarios;
+    private GestionContable gContable; 
 
-    public ModelTableInventario(List<Inventario> inventario, GestionContable gContable) {
-        this.inventario = inventario;
+    public ModelTableInventario(List<Inventario> inventarios, GestionContable gContable) {
+        this.inventarios = inventarios;
         this.gContable = gContable;
     }
 
     //Determina el numero de filas que tengo en mi tabla.
     @Override
     public int getRowCount() {
-        return inventario.size();
+        return inventarios.size();
     }
 
     //Determina el numero de columnas que tengo en mi tabla.
@@ -32,14 +31,14 @@ public class ModelTableInventario extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Inventario producto = inventario.get(rowIndex);
+        Inventario producto = inventarios.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return producto.getCódigoPro();
+                return producto.getCodProducto();
             case 1:
-                return producto.getDescripción();
+                return producto.getDescripcion();
             case 2:
-                return producto.getPreciosCompra();
+                return producto.getPrecioCompra();
             case 3:
                 return producto.getPrecioVenta();
             case 4:
@@ -57,16 +56,16 @@ public class ModelTableInventario extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        gContable.clickInventario(inventario.get(rowIndex));
+        gContable.clickInventario(inventarios.get(rowIndex));
         return super.isCellEditable(rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<Inventario> getInventario() {
-        return inventario;
+        return inventarios;
     }
 
     public void setInventario(List<Inventario> inventario) {
-        this.inventario = inventario;
+        this.inventarios = inventario;
     }
 
 }

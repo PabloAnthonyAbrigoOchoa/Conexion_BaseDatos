@@ -1,6 +1,6 @@
 package com.istloja.conexionbd;
 
-import com.istloja.controlador.Personabd;
+import com.istloja.controlador.Personadb;
 import java.sql.SQLException;
 import com.istloja.modelo.Persona;
 import com.istloja.vistas.GestionPersonas;

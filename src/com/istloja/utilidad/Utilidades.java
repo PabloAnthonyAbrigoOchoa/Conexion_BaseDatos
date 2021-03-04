@@ -9,8 +9,8 @@ public class Utilidades {
             {
                 int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
                 if (tercerDigito < 6) {
-    // Coeficientes de validación cédula
-    // El decimo digito se lo considera dígito verificador
+                    // Coeficientes de validación cédula
+                    // El decimo digito se lo considera dígito verificador
                     int[] coefValCedula = {2, 1, 2, 1, 2, 1, 2, 1, 2};
                     int verificador = Integer.parseInt(cedula.substring(9, 10));
                     int suma = 0;
@@ -65,6 +65,7 @@ public class Utilidades {
         }
 
     }
+
     //Metodo para validar la correo electronico
     public boolean validarCorreo(String correo) {
         for (int i = 0; i < correo.length(); i++) {
@@ -74,5 +75,15 @@ public class Utilidades {
             }
         }
         return false;
+    }
+
+    //Metodo para validar los numeros del inventario.
+    public boolean validarNumeroInventario(String numero) {
+        try {
+            int validarNumero = Integer.parseInt(numero);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Proveedoresbd {
+public class Proveedoresdb {
 
     public boolean registrarProveedor(Proveedores proveedor) {
         boolean registrar = false;
