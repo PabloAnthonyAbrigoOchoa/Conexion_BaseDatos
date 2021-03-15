@@ -8,23 +8,21 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTablePersona extends AbstractTableModel {
 
     //Arreglo con el nombre de las columnas.
-    private String[] m_colNames = {"CÉDULA", "NOMBRES", "APELLIDOS", "DIRECCIÓN", "CORREO", "TELÉFONO"};
+    private String[] m_colNames = {"CÉDULA", "NOMBRES", "APELLIDOS", "DIRECCIÓN", "CORREO", "TELÉFONO", "FECHA REGISTRO", "GENERO"};
     private List<Persona> personas;
-    private GestionContable gContable; 
-    
-   
+    private GestionContable gContable;
 
     public ModelTablePersona(List<Persona> personas, GestionContable gContable) {
         this.personas = personas;
         this.gContable = gContable;
     }
-    
+
     //Determina el numero de filas que tengo en mi tabla.
     @Override
     public int getRowCount() {
         return personas.size();
     }
-    
+
     //Determina el numero de columnas que tengo en mi tabla.
     @Override
     public int getColumnCount() {
@@ -34,7 +32,7 @@ public class ModelTablePersona extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Persona persona = personas.get(rowIndex);
-        switch(columnIndex){
+        switch (columnIndex) {
             case 0:
                 return persona.getCedula();
             case 1:
@@ -44,11 +42,15 @@ public class ModelTablePersona extends AbstractTableModel {
             case 3:
                 return persona.getDireccion();
             case 4:
-                return persona.getTelefono();
-            case 5:
                 return persona.getCorreo();
+            case 5:
+                return persona.getTelefono();
+            case 6:
+                return persona.getFecha_registro();
+            case 7:
+                return persona.getGenero();
         }
-        return new String(); 
+        return new String();
     }
 
     //Metodo que sirve para definir los nombres de las columnas.

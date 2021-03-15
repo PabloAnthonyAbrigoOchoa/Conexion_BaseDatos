@@ -16,7 +16,7 @@ public class Personadb {
         boolean registrar = false;
         Statement stm = null;//Interfaz de acceso a la base de datos
         Connection con = null;//COnexion con la base de datos
-        String sql = "INSERT INTO `bdejercicio1`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`)VALUES ('" + String.valueOf(persona.getIdPersona()) + "', '" + persona.getCedula() + "', '" + persona.getNombres() + "', '" + persona.getApellidos() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "');";
+        String sql = "INSERT INTO `bdejercicio1`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`,`fecha_registro`,`genero`)VALUES ('" + String.valueOf(persona.getIdPersona()) + "', '" + persona.getCedula() + "', '" + persona.getNombres() + "', '" + persona.getApellidos() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','" + persona.getFecha_registro()+ "','" + persona.getGenero() + "');";
         try {
             //Instancia de la conexion previamente creada
             Conexion conexion = new Conexion();
@@ -38,7 +38,7 @@ public class Personadb {
         Statement stm = null;//Interfaz de acceso a la BD
         Connection con = null;//Conexion con la BD
         //Concatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombres() + "', `apellidos` = '" + persona.getApellidos() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "' WHERE (`idpersona` = '" + persona.getIdPersona() + "');";
+        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombres() + "', `apellidos` = '" + persona.getApellidos() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '" + persona.getFecha_registro()+ "',`genero` = '" + persona.getGenero() + "' WHERE (`idpersona` = '" + persona.getIdPersona() + "');";
         try {
             Conexion conexion = new Conexion();
             con = conexion.conectarBaseDatos();

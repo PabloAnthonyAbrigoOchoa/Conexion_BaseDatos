@@ -78,9 +78,10 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        btnBuscarCedula = new javax.swing.JButton();
         btnBuscarApellido = new javax.swing.JButton();
         btnBuscarTelefono = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         jScrollCliente = new javax.swing.JScrollPane();
         tablaCliente = new javax.swing.JTable();
         lblBuscarCliente = new javax.swing.JLabel();
@@ -202,12 +203,9 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         lbCorreo.setText("Correo:");
 
         txtCedula.setToolTipText("Ingrese una cédula válida");
-
-        btnBuscarCedula.setText("Buscar");
-        btnBuscarCedula.setToolTipText("Buscar persona por cédula ingresada");
-        btnBuscarCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarCedulaActionPerformed(evt);
+        txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedulaFocusLost(evt);
             }
         });
 
@@ -224,6 +222,10 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
                 btnBuscarTelefonoActionPerformed(evt);
             }
         });
+
+        jRadioButton1.setText("Cédula");
+
+        jRadioButton2.setText("Pasaporte");
 
         javax.swing.GroupLayout panelCuerpoRegistroLayout = new javax.swing.GroupLayout(panelCuerpoRegistro);
         panelCuerpoRegistro.setLayout(panelCuerpoRegistroLayout);
@@ -253,30 +255,34 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
                             .addComponent(lbCedula)
                             .addComponent(lbApellido))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtDireccion)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createSequentialGroup()
-                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnBuscarCedula))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createSequentialGroup()
-                            .addComponent(txtApellidos)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnBuscarApellido))
-                        .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDireccion)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createSequentialGroup()
+                                .addComponent(txtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarApellido))
+                            .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createSequentialGroup()
+                        .addComponent(txtCedula)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton2)
+                        .addGap(1, 1, 1))))
         );
         panelCuerpoRegistroLayout.setVerticalGroup(
             panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbCedula))
-                    .addComponent(btnBuscarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
+                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbCedula)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(12, 12, 12)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNombre))
@@ -669,7 +675,7 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtInventarioCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInventarioCrear)
                     .addComponent(btnInventarioEditar)
@@ -882,11 +888,6 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
             txtCedula.requestFocus();
         }
     }
-    private void btnBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCedulaActionPerformed
-        // TODO add your handling code here:
-        buscarPersonaPorCedula();
-    }//GEN-LAST:event_btnBuscarCedulaActionPerformed
-
     private void btnBuscarApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarApellidoActionPerformed
         // TODO add your handling code here:
         Persona persona = controladorPersona.getBuscarApellido(txtApellidos.getText());
@@ -993,7 +994,9 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
     private void btnInventarioCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioCrearActionPerformed
         Inventario i = new Inventario();
         i.setCodProducto(txtInventarioCodProducto.getText());
+        i.setCanProductos(txtInventarioCantidadProductos.getText());
         i.setDescripcion(txtInventarioDesripcion.getText());
+        i.setPrecio_compra_sin_iva();
         i.setPrecioCompra(txtInventarioPrecioCompra.getText());
         i.setPrecioVenta(txtInventarioPrecioVenta.getText());
         i.setCanProductos(txtInventarioCantidadProductos.getText());
@@ -1057,6 +1060,11 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         }
     }//GEN-LAST:event_btnInventarioBusquedaActionPerformed
 
+    private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtCedulaFocusLost
+
     private Inventario valoresActualizarInventario(Inventario i) {
         i.setCodProducto(txtInventarioCodProducto.getText());
         i.setDescripcion(txtInventarioDesripcion.getText());
@@ -1116,7 +1124,6 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarApellido;
-    private javax.swing.JButton btnBuscarCedula;
     private javax.swing.JButton btnBuscarPersona;
     private javax.swing.JButton btnBuscarProveedor;
     private javax.swing.JButton btnBuscarTelefono;
@@ -1155,6 +1162,8 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollCliente;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

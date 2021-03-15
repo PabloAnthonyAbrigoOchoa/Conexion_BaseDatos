@@ -1,24 +1,38 @@
 package com.istloja.modelo;
 
+import java.sql.Date;
+
 public class Inventario {
 
     private int idInventario;
     private String codProducto;
-    private String descripcion;
-    private String precioCompra;
-    private String precioVenta;
     private String canProductos;
+    private String descripcion;
+    private double precio_compra_sin_iva;
+    private double precio_compra_con_iva;
+    private double precio_mayorista;
+    private double precio_cliente_fijo;
+    private double precio_cliente_normal;
+    private Date fecha_caducidad;
+    private Date fecha_registro;
+    private Date fecha_actualizacion;
 
-    public Inventario() {
-    }
-
-    public Inventario(int idInventario, String codProducto, String descripcion, String precioCompra, String precioVenta, String canProductos) {
+    public Inventario(int idInventario, String codProducto, String canProductos, String descripcion, double precio_compra_sin_iva, double precio_compra_con_iva, double precio_mayorista, double precio_cliente_fijo, double precio_cliente_normal, Date fecha_caducidad, Date fecha_registro, Date fecha_actualizacion) {
         this.idInventario = idInventario;
         this.codProducto = codProducto;
-        this.descripcion = descripcion;
-        this.precioCompra = precioCompra;
-        this.precioVenta = precioVenta;
         this.canProductos = canProductos;
+        this.descripcion = descripcion;
+        this.precio_compra_sin_iva = precio_compra_sin_iva;
+        this.precio_compra_con_iva = precio_compra_con_iva;
+        this.precio_mayorista = precio_mayorista;
+        this.precio_cliente_fijo = precio_cliente_fijo;
+        this.precio_cliente_normal = precio_cliente_normal;
+        this.fecha_caducidad = fecha_caducidad;
+        this.fecha_registro = fecha_registro;
+        this.fecha_actualizacion = fecha_actualizacion;
+    }
+
+    public Inventario() {
     }
 
     public int getIdInventario() {
@@ -37,30 +51,6 @@ public class Inventario {
         this.codProducto = codProducto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(String precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public String getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(String precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
     public String getCanProductos() {
         return canProductos;
     }
@@ -69,9 +59,81 @@ public class Inventario {
         this.canProductos = canProductos;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getPrecio_compra_sin_iva() {
+        return precio_compra_sin_iva;
+    }
+
+    public void setPrecio_compra_sin_iva(double precio_compra_sin_iva) {
+        this.precio_compra_sin_iva = precio_compra_sin_iva;
+    }
+
+    public double getPrecio_compra_con_iva() {
+        return precio_compra_con_iva;
+    }
+
+    public void setPrecio_compra_con_iva(double precio_compra_con_iva) {
+        this.precio_compra_con_iva = precio_compra_con_iva;
+    }
+
+    public double getPrecio_mayorista() {
+        return precio_mayorista;
+    }
+
+    public void setPrecio_mayorista(double precio_mayorista) {
+        this.precio_mayorista = precio_mayorista;
+    }
+
+    public double getPrecio_cliente_fijo() {
+        return precio_cliente_fijo;
+    }
+
+    public void setPrecio_cliente_fijo(double precio_cliente_fijo) {
+        this.precio_cliente_fijo = precio_cliente_fijo;
+    }
+
+    public double getPrecio_cliente_normal() {
+        return precio_cliente_normal;
+    }
+
+    public void setPrecio_cliente_normal(double precio_cliente_normal) {
+        this.precio_cliente_normal = precio_cliente_normal;
+    }
+
+    public Date getFecha_caducidad() {
+        return fecha_caducidad;
+    }
+
+    public void setFecha_caducidad(Date fecha_caducidad) {
+        this.fecha_caducidad = fecha_caducidad;
+    }
+
+    public Date getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
+
+    public Date getFecha_actualizacion() {
+        return fecha_actualizacion;
+    }
+
+    public void setFecha_actualizacion(Date fecha_actualizacion) {
+        this.fecha_actualizacion = fecha_actualizacion;
+    }
+
     @Override
     public String toString() {
-        return "Inventario{" + "idInventario=" + idInventario + ", codProducto=" + codProducto + ", descripcion=" + descripcion + ", precioCompra=" + precioCompra + ", precioVenta=" + precioVenta + ", canProductos=" + canProductos + '}';
+        return "Inventario{" + "idInventario=" + idInventario + ", codProducto=" + codProducto + ", canProductos=" + canProductos + ", descripcion=" + descripcion + ", precio_compra_sin_iva=" + precio_compra_sin_iva + ", precio_compra_con_iva=" + precio_compra_con_iva + ", precio_mayorista=" + precio_mayorista + ", precio_cliente_fijo=" + precio_cliente_fijo + ", precio_cliente_normal=" + precio_cliente_normal + ", fecha_caducidad=" + fecha_caducidad + ", fecha_registro=" + fecha_registro + ", fecha_actualizacion=" + fecha_actualizacion + '}';
     }
 
 }

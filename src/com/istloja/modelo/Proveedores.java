@@ -1,5 +1,7 @@
 package com.istloja.modelo;
 
+import java.sql.Date;
+
 public class Proveedores {
 
     private int idProveedores;
@@ -10,11 +12,10 @@ public class Proveedores {
     private String ApellidoRepresentanteLegal;
     private String telefono;
     private String correo;
+    private String direccion;
+    private Date fecha_registro;
 
-    public Proveedores() {
-    }
-
-    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String ApellidoRepresentanteLegal, String telefono, String correo) {
+    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String ApellidoRepresentanteLegal, String telefono, String correo, String direccion, Date fecha_registro) {
         this.idProveedores = idProveedores;
         this.ruc = ruc;
         this.razonSocial = razonSocial;
@@ -23,6 +24,11 @@ public class Proveedores {
         this.ApellidoRepresentanteLegal = ApellidoRepresentanteLegal;
         this.telefono = telefono;
         this.correo = correo;
+        this.direccion = direccion;
+        this.fecha_registro = fecha_registro;
+    }
+
+    public Proveedores() {
     }
 
     public int getIdProveedores() {
@@ -89,9 +95,25 @@ public class Proveedores {
         this.correo = correo;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Date getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
+
     @Override
     public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", ApellidoRepresentanteLegal=" + ApellidoRepresentanteLegal + ", telefono=" + telefono + ", correo=" + correo + '}';
+        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", ApellidoRepresentanteLegal=" + ApellidoRepresentanteLegal + ", telefono=" + telefono + ", correo=" + correo + ", direccion=" + direccion + ", fecha_registro=" + fecha_registro + '}';
     }
 
 }
