@@ -15,7 +15,7 @@ public class Proveedoresdb {
         boolean registrar = false;
         Statement stm = null;//Interfaz de acceso a la base de datos
         Connection con = null;//COnexion con la base de datos
-        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`,`direccion`,`fecha_registro`) VALUES ('" + proveedor.getRuc() + "', '" + proveedor.getRazonSocial() + "', '" + proveedor.getTipoActividad() + "', '" + proveedor.getNombreRepresentanteLegal() + "', '" + proveedor.getApellidoRepresentanteLegal() + "', '" + proveedor.getTelefono() + "', '" + proveedor.getCorreo() + "','" + proveedor.getDireccion()+ "','" + proveedor.getFecha_registro() + "')";
+        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`,`direccion`,`fecha_registro`,`fecha_vencimiento_deuda`) VALUES ('" + proveedor.getRuc() + "', '" + proveedor.getRazonSocial() + "', '" + proveedor.getTipoActividad() + "', '" + proveedor.getNombreRepresentanteLegal() + "', '" + proveedor.getApellidoRepresentanteLegal() + "', '" + proveedor.getTelefono() + "', '" + proveedor.getCorreo() + "','" + proveedor.getDireccion() + "','" + proveedor.getFecha_registro() + "','" + proveedor.getFechaVencimientoDeuda() + "')";
         try {
             //Instancia de la conexion previamente creada
             Conexion conexion = new Conexion();
@@ -38,7 +38,7 @@ public class Proveedoresdb {
         Statement stm = null;//Interfaz de acceso a la BD
         Connection con = null;//Conexion con la BD
         //Concatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`proveedores` SET `ruc` = '" + proveedor.getRuc() + "', `razon_social` = '" + proveedor.getRazonSocial() + "', `tipo_actividad` = '" + proveedor.getTipoActividad() + "', `nombre_representante_legal` = '" + proveedor.getNombreRepresentanteLegal() + "', `apellido_representante_legal` = '" + proveedor.getApellidoRepresentanteLegal() + "', `telefono` = '" + proveedor.getTelefono() + "', `correo` = '" + proveedor.getCorreo() + "',`direccion` = '" + proveedor.getDireccion() + "',`fecha_registro` = '" + proveedor.getFecha_registro() + "' WHERE (`idproveedores` = '" + proveedor.getIdProveedores() + "');";
+        String sql = "UPDATE `bdejercicio1`.`proveedores` SET `ruc` = '" + proveedor.getRuc() + "', `razon_social` = '" + proveedor.getRazonSocial() + "', `tipo_actividad` = '" + proveedor.getTipoActividad() + "', `nombre_representante_legal` = '" + proveedor.getNombreRepresentanteLegal() + "', `apellido_representante_legal` = '" + proveedor.getApellidoRepresentanteLegal() + "', `telefono` = '" + proveedor.getTelefono() + "', `correo` = '" + proveedor.getCorreo() + "',`direccion` = '" + proveedor.getDireccion() + "',`fecha_registro` = '" + proveedor.getFecha_registro() + "',`fecha_vencimiento_deuda` = '" + proveedor.getFechaVencimientoDeuda() + "' WHERE (`idproveedores` = '" + proveedor.getIdProveedores() + "');";
         try {
             Conexion conexion = new Conexion();
             con = conexion.conectarBaseDatos();
@@ -92,6 +92,9 @@ public class Proveedoresdb {
                 c.setApellidoRepresentanteLegal(rs.getString(6));
                 c.setTelefono(rs.getString(7));
                 c.setCorreo(rs.getString(8));
+                c.setDireccion(rs.getString(9));
+                c.setFecha_registro(rs.getDate(10));
+                c.setFechaVencimientoDeuda(rs.getDate(11));
                 listaProveedores.add(c);
             }
             stm.close();

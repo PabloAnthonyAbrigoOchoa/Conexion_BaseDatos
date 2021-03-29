@@ -1,6 +1,5 @@
 package com.istloja.modelTablas;
 
-import com.istloja.modelo.Persona;
 import com.istloja.modelo.Proveedores;
 import com.istloja.vistas.GestionContable;
 import java.util.List;

@@ -13,9 +13,10 @@ public class Proveedores {
     private String telefono;
     private String correo;
     private String direccion;
+    private Date fechaVencimientoDeuda;
     private Date fecha_registro;
 
-    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String ApellidoRepresentanteLegal, String telefono, String correo, String direccion, Date fecha_registro) {
+    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String ApellidoRepresentanteLegal, String telefono, String correo, String direccion, Date fechaVencimientoDeuda, Date fecha_registro) {
         this.idProveedores = idProveedores;
         this.ruc = ruc;
         this.razonSocial = razonSocial;
@@ -25,6 +26,7 @@ public class Proveedores {
         this.telefono = telefono;
         this.correo = correo;
         this.direccion = direccion;
+        this.fechaVencimientoDeuda = fechaVencimientoDeuda;
         this.fecha_registro = fecha_registro;
     }
 
@@ -111,9 +113,17 @@ public class Proveedores {
         this.fecha_registro = fecha_registro;
     }
 
+    public Date getFechaVencimientoDeuda() {
+        return fechaVencimientoDeuda;
+    }
+
+    public void setFechaVencimientoDeuda(Date fechaVencimientoDeuda) {
+        this.fechaVencimientoDeuda = fechaVencimientoDeuda;
+    }
+
     @Override
     public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", ApellidoRepresentanteLegal=" + ApellidoRepresentanteLegal + ", telefono=" + telefono + ", correo=" + correo + ", direccion=" + direccion + ", fecha_registro=" + fecha_registro + '}';
+        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", ApellidoRepresentanteLegal=" + ApellidoRepresentanteLegal + ", telefono=" + telefono + ", correo=" + correo + ", direccion=" + direccion + ", fechaVencimientoDeuda=" + fechaVencimientoDeuda + ", fecha_registro=" + fecha_registro + '}';
     }
 
 }

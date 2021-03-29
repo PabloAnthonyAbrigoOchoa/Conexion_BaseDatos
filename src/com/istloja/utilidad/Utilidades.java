@@ -1,5 +1,8 @@
 package com.istloja.utilidad;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class Utilidades {
 
     public boolean validadorDeCedula(String cedula) {
@@ -85,5 +88,11 @@ public class Utilidades {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    //Metodo para formatear la fecha al formato A-M-D
+    public String devolverFecha(Date fecha) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        return f.format(fecha);
     }
 }
