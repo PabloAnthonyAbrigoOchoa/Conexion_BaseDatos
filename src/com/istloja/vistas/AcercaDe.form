@@ -32,7 +32,6 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -74,6 +73,7 @@
           <Image iconType="3" name="/com/istloja/resource/img/factura.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="SISTEMA DE FACTURAZI&#xd3;N"/>
+        <Property name="toolTipText" type="java.lang.String" value="Imagen Software"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[360, 128]"/>
         </Property>

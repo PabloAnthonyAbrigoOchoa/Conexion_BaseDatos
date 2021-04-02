@@ -2,13 +2,13 @@ package com.istloja.modelTablas;
 
 import com.istloja.vistas.GestionContable;
 import java.util.List;
-import com.istloja.modelo.Ventas;
+import com.istloja.modelo.NotaVentas;
 import javax.swing.table.AbstractTableModel;
 
-public class ModelTableVentas extends AbstractTableModel {
+public class ModelTableNotaVentas extends AbstractTableModel {
 
-    private String[] m_colNames = {"CANTIDAD", "CODIGO", "DESCRIPCIÓN", "PRECIO UNITARIO", "TOTAL"};
-    private List<Ventas> ventas;
+    private String[] m_colNames = {"CANTIDAD", "DESCRIPCIÓN", "SUBTOTAL", "TOTAL"};
+    private List<NotaVentas> ventas;
     private GestionContable gContable;
 
     @Override
@@ -23,27 +23,24 @@ public class ModelTableVentas extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Ventas ventas = this.ventas.get(rowIndex);
+        NotaVentas ventas = this.ventas.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return ventas.getIdVentas();
+                return ventas.getIdNotaVenta();
             case 1:
-                return ventas.getCedula();
+                return ventas.getNumeroNotaVenta();
             case 2:
-                return ventas.getNombre();
+                return ventas.getPersonaIdPersona();
             case 3:
-                return ventas.getDireccion();
+                return ventas.getFechaVenta();
             case 4:
-                return ventas.getCiudad();
+                return ventas.getSubTotal();
             case 5:
-                return ventas.getCp();
+                return ventas.getIva();
             case 6:
-                return ventas.getTelefono();
+                return ventas.getTotalVenta();
             case 7:
-                return ventas.getFecha();
-            case 8:
-                return ventas.getCondicionesPago();
-
+                return ventas.getTipoPago();
         }
         return new String();
     }

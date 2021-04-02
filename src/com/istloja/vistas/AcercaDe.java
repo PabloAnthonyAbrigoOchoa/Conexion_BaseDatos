@@ -33,6 +33,7 @@ public class AcercaDe extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Lucida Handwriting", 0, 16)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/istloja/resource/img/factura.png"))); // NOI18N
         jLabel1.setText("SISTEMA DE FACTURAZIÓN");
+        jLabel1.setToolTipText("Imagen Software");
         jLabel1.setMaximumSize(new java.awt.Dimension(360, 128));
         jLabel1.setMinimumSize(new java.awt.Dimension(350, 128));
 
@@ -51,7 +52,6 @@ public class AcercaDe extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()

@@ -258,4 +258,37 @@ public class Personadb {
         }
         return personasEncontradas;
     }
+
+    public Persona getPersonaNombreVenta(String nombre) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;//Sentencia del JDBC para obtener valores de la BD
+        Persona c = null;
+        String sql = "SELECT * FROM bdejercicio1.persona where nombres like \"%" + nombre + "%\"";
+        try {
+            con = new Conexion().conectarBaseDatos();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Persona();
+                c.setIdPersona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombres(rs.getString(3));
+                c.setApellidos(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
+                c.setFecha_actualizacion(rs.getDate(10));
+                c.setFecha_nacimiento(rs.getDate(11));
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return c;
+    }
 }
