@@ -3,8 +3,11 @@ package com.istloja.controlador;
 import com.istloja.modelo.TipoUsuario;
 import conexionBaseDatos.Conexion;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TipoUsuariodb {
 
@@ -26,7 +29,7 @@ public class TipoUsuariodb {
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return registrar;
+        return false;
 
     }
     //Editamos o actualizamos un tipoUsuario en la BD
@@ -47,7 +50,7 @@ public class TipoUsuariodb {
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return actualizar;
+        return false;
 
     }
     //Eliminamos un tipoUsuario en la BD
@@ -68,8 +71,35 @@ public class TipoUsuariodb {
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return eliminar;
+        return false;
 
     }
+    public List<TipoUsuario> ObtenerUsuarios() {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        String sql = "select * from bdejercicio1.tipo_usuario;";
+        List<TipoUsuario> listaPersonas = new ArrayList<TipoUsuario>();
+        try {
+            co = new Conexion().conectarBaseDatos();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                TipoUsuario c = new TipoUsuario();
+                c.setTipoUsuarioSistema(rs.getInt(1));
+                c.setTipoUsuarioSistema(rs.getInt(2));
+                c.setIdPersonaSistema(rs.getInt(3));
+                c.setContraseña(rs.getString(4));
+                listaPersonas.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
 
+        return listaPersonas;
+    }
 }

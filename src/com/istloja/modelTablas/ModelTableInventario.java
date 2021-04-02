@@ -9,18 +9,20 @@ public class ModelTableInventario extends AbstractTableModel {
 
     //Arreglo con el nombre de las columnas.
     private String[] m_colNames = {"COD PRODUCTO", "CAN PRODUCTO", "DESCRIPCIÓN", "PRECIO COMPRA SIN IVA", "PRECIO COMPRA CON IVA", "PRECIO MAYORISTA", "PRECIO CLIENTE FIJO", "PRECIO CLIENTE NORMAL", "FECHA CADUCIDAD", "FECHA REGISTRO", "FECHA ACTUALIZACION",};
-    private List<Inventario> inventarios;
+    private List<Inventario> inventario;
     private GestionContable gContable;
+    private ComunicacionVistaModelosTablas comunicacionPersona;
+    private GestionContable gestionContable;
 
-    public ModelTableInventario(List<Inventario> inventarios, GestionContable gContable) {
-        this.inventarios = inventarios;
-        this.gContable = gContable;
+    public ModelTableInventario(List<Inventario> inventario, GestionContable gestionContable) {
+        this.inventario = inventario;
+        this.gestionContable = gestionContable;
     }
 
     //Determina el numero de filas que tengo en mi tabla.
     @Override
     public int getRowCount() {
-        return inventarios.size();
+        return inventario.size();
     }
 
     //Determina el numero de columnas que tengo en mi tabla.
@@ -31,7 +33,7 @@ public class ModelTableInventario extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Inventario producto = inventarios.get(rowIndex);
+        Inventario producto = inventario.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return producto.getCodProducto();
@@ -68,16 +70,16 @@ public class ModelTableInventario extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        gContable.clickInventario(inventarios.get(rowIndex));
-        return super.isCellEditable(rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.
+        gContable.clickInventario(inventario.get(rowIndex));
+        return super.isCellEditable(rowIndex, columnIndex);
     }
 
     public List<Inventario> getInventario() {
-        return inventarios;
+        return inventario;
     }
 
     public void setInventario(List<Inventario> inventario) {
-        this.inventarios = inventario;
+        this.inventario = inventario;
     }
 
 }

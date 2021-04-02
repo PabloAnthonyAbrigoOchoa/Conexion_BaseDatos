@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class GestionPersonas {
-    
+
     private JTextField txtCedula;
     private JTextField txtNombres;
     private JTextField txtApellidos;
@@ -19,7 +19,7 @@ public class GestionPersonas {
     private Utilidades utilidades;
     private JFrame frameGestionContable;
     private JComboBox jcbGenero;
-    
+
     public GestionPersonas(JTextField txtCedula, JTextField txtNombres, JTextField txtApellidos, JTextField txtDireccion, JTextField txtTelefono, JTextField txtCorreo, Utilidades utilidades, JFrame frameGestionContable, JComboBox jcbGenero) {
         this.txtCedula = txtCedula;
         this.txtNombres = txtNombres;
@@ -31,63 +31,63 @@ public class GestionPersonas {
         this.frameGestionContable = frameGestionContable;
         this.jcbGenero = jcbGenero;
     }
-    
+
     public JTextField getTxtCedula() {
         return txtCedula;
     }
-    
+
     public void setTxtCedula(JTextField txtCedula) {
         this.txtCedula = txtCedula;
     }
-    
+
     public JTextField getTxtNombres() {
         return txtNombres;
     }
-    
+
     public void setTxtNombres(JTextField txtNombres) {
         this.txtNombres = txtNombres;
     }
-    
+
     public JTextField getTxtApellidos() {
         return txtApellidos;
     }
-    
+
     public void setTxtApellidos(JTextField txtApellidos) {
         this.txtApellidos = txtApellidos;
     }
-    
+
     public JTextField getTxtDireccion() {
         return txtDireccion;
     }
-    
+
     public void setTxtDireccion(JTextField txtDireccion) {
         this.txtDireccion = txtDireccion;
     }
-    
+
     public JTextField getTxtTelefono() {
         return txtTelefono;
     }
-    
+
     public void setTxtTelefono(JTextField txtTelefono) {
         this.txtTelefono = txtTelefono;
     }
-    
+
     public JTextField getTxtCorreo() {
         return txtCorreo;
     }
-    
+
     public void setTxtCorreo(JTextField txtCorreo) {
         this.txtCorreo = txtCorreo;
     }
-    
+
     public Utilidades getUtilidades() {
         return utilidades;
     }
-    
+
     public void setUtilidades(Utilidades utilidades) {
         this.utilidades = utilidades;
     }
-    
+
     public void limpiarCamposPersona() {
         txtCedula.setText("");
         txtNombres.setText("");
@@ -98,8 +98,8 @@ public class GestionPersonas {
         txtCedula.requestFocus();
         jcbGenero.setSelectedIndex(0);
     }
-    
-    public Persona guardarEditar() {
+
+    public Persona guardarEditar(boolean isEditar) {
         if (txtCedula.getText().isEmpty()) {
             JOptionPane.showMessageDialog(frameGestionContable, "El campo Cédula no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtCedula.requestFocus();//Sirve para ubicar el cursor en un campo vacio
@@ -133,7 +133,7 @@ public class GestionPersonas {
             JOptionPane.showMessageDialog(frameGestionContable, "Los datos ingresados en el telefono no son validos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtTelefono.requestFocus();
             return null;
-            
+
         }
         if (txtCorreo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(frameGestionContable, "El campo Correo no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -153,15 +153,12 @@ public class GestionPersonas {
         persona.setCorreo(txtCorreo.getText());
         persona.setTelefono(txtTelefono.getText());
         persona.setGenero(jcbGenero.getSelectedIndex());
-        boolean isEditar = false;
+
         if (isEditar) {
             persona.setFecha_actualizacion(new Date(0));
-        }else{ 
+        } else {
             persona.setFecha_registro(new Date(0));
         }
         return persona;
     }
 }
-        
-        
-

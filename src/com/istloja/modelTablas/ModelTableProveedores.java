@@ -11,6 +11,8 @@ public class ModelTableProveedores extends AbstractTableModel {
     private String[] m_colNames = {"RUC", "RAZON SOCIAL", "TIPO ACTIVIDAS", "NOMBRE REPRESENTANTE LEGAL", "APELLIDO REPRESENTANTE LEGAL", "TELEFONO", "CORREO", "DIRECCION", "FECHA_REGISTRO"};
     private List<Proveedores> proveedores;
     private GestionContable gContable;
+    private ComunicacionVistaModelosTablas comunicacionPersona;
+    private GestionContable gestionContable;
 
     public ModelTableProveedores(List<Proveedores> proveedores, GestionContable gContable) {
         this.proveedores = proveedores;
@@ -50,7 +52,7 @@ public class ModelTableProveedores extends AbstractTableModel {
             case 7:
                 return proveedor.getDireccion();
             case 8:
-                return proveedor.getFecha_registro();
+                return proveedor.getFechaVencimientoDeuda();
         }
         return new String();
     }
@@ -65,7 +67,7 @@ public class ModelTableProveedores extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         gContable.clickProveedores(proveedores.get(rowIndex));
-        return super.isCellEditable(rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.
+        return super.isCellEditable(rowIndex, columnIndex);
     }
 
     public List<Proveedores> getProveedores() {

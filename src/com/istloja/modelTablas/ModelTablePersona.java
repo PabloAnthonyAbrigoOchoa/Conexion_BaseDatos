@@ -11,6 +11,8 @@ public class ModelTablePersona extends AbstractTableModel {
     private String[] m_colNames = {"CÉDULA", "NOMBRES", "APELLIDOS", "DIRECCIÓN", "CORREO", "TELÉFONO", "FECHA REGISTRO", "GENERO"};
     private List<Persona> personas;
     private GestionContable gContable;
+    private ComunicacionVistaModelosTablas comunicacionPersona;
+    private GestionContable gestionContable;
 
     public ModelTablePersona(List<Persona> personas, GestionContable gContable) {
         this.personas = personas;
@@ -49,6 +51,8 @@ public class ModelTablePersona extends AbstractTableModel {
                 return persona.getFecha_registro();
             case 7:
                 return persona.getGenero();
+            case 8:
+                return persona.getFecha_nacimiento();
         }
         return new String();
     }
@@ -63,7 +67,7 @@ public class ModelTablePersona extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         gContable.clickPersona(personas.get(rowIndex));
-        return super.isCellEditable(rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.
+        return super.isCellEditable(rowIndex, columnIndex);
     }
 
     public List<Persona> getPersonas() {

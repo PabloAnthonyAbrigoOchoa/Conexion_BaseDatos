@@ -4,6 +4,10 @@ import java.sql.Date;
 
 public class Inventario {
 
+    public static Inventario get(int rowIndex) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     private int idInventario;
     private String codProducto;
     private String canProductos;
@@ -33,6 +37,16 @@ public class Inventario {
     }
 
     public Inventario() {
+    }
+
+    public Date fechaderegistro() {
+        fecha_registro = new Date(fecha_registro.getYear(), fecha_registro.getMonth(), fecha_registro.getDay());
+        return fecha_registro;
+    }
+
+    public Date fechadeActualizacion() {
+        fecha_actualizacion = new Date(fecha_actualizacion.getYear(), fecha_actualizacion.getMonth(), fecha_actualizacion.getDay());
+        return fecha_actualizacion;
     }
 
     public int getIdInventario() {

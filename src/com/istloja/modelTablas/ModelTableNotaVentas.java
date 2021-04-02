@@ -1,5 +1,6 @@
 package com.istloja.modelTablas;
 
+import com.istloja.modelo.Inventario;
 import com.istloja.vistas.GestionContable;
 import java.util.List;
 import com.istloja.modelo.NotaVentas;
@@ -10,6 +11,12 @@ public class ModelTableNotaVentas extends AbstractTableModel {
     private String[] m_colNames = {"CANTIDAD", "DESCRIPCIÓN", "SUBTOTAL", "TOTAL"};
     private List<NotaVentas> ventas;
     private GestionContable gContable;
+    private ComunicacionVistaModelosTablas comunicacionPersona;
+    private GestionContable gestionContable;
+
+    public ModelTableNotaVentas(List<Inventario> obtenerProductosInventario, GestionContable aThis) {
+
+    }
 
     @Override
     public int getRowCount() {
@@ -23,24 +30,16 @@ public class ModelTableNotaVentas extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        NotaVentas ventas = this.ventas.get(rowIndex);
+        Inventario inventarios = Inventario.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return ventas.getIdNotaVenta();
+                return gestionContable.cantidadproductoVenta();
             case 1:
-                return ventas.getNumeroNotaVenta();
+                return inventarios.getDescripcion();
             case 2:
-                return ventas.getPersonaIdPersona();
+                return inventarios.getPrecio_cliente_normal();
             case 3:
-                return ventas.getFechaVenta();
-            case 4:
-                return ventas.getSubTotal();
-            case 5:
-                return ventas.getIva();
-            case 6:
-                return ventas.getTotalVenta();
-            case 7:
-                return ventas.getTipoPago();
+                return gestionContable.cantidadproductoVenta() * inventarios.getPrecio_cliente_normal();
         }
         return new String();
     }

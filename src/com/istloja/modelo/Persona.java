@@ -1,6 +1,7 @@
 package com.istloja.modelo;
 
 import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 
 public class Persona {
 
@@ -30,6 +31,11 @@ public class Persona {
     }
 
     public Persona() {
+    }
+
+    public DateTimeFormatter fechaderegistro() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return dtf;
     }
 
     public Persona(int idPersona) {
@@ -128,4 +134,5 @@ public class Persona {
     public String toString() {
         return "Persona{" + "idPersona=" + idPersona + ", cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + ", fecha_registro=" + fecha_registro + ", genero=" + genero + ", fecha_actualizacion=" + fecha_actualizacion + ", fecha_nacimiento=" + fecha_nacimiento + '}';
     }
+
 }

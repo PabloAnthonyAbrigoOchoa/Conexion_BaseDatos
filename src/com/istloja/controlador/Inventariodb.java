@@ -1,6 +1,7 @@
 package com.istloja.controlador;
 
 import com.istloja.modelo.Inventario;
+import com.istloja.utilidad.Utilidades;
 import conexionBaseDatos.Conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventariodb {
+
+    public Utilidades utilidades;
+
+    public Inventariodb() {
+        utilidades = new Utilidades();
+    }
 
     //Crear producto en la Base de Datos
     public boolean crearProducto(Inventario inventario) {
@@ -176,5 +183,76 @@ public class Inventariodb {
             System.out.println("Error:" + e.getMessage());
         }
         return listaInventario;
+    }
+
+    public List<Inventario> ObtenerInventarioCantidadLista(String Cantidad) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        String sql = "SELECT * FROM bdejercicio1.inventario where can_productos like '%" + Cantidad + "%';";
+        List<Inventario> listaInventario = new ArrayList<>();
+        try {
+            co = new Conexion().conectarBaseDatos();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Inventario c = new Inventario();
+                c.setIdInventario(rs.getInt(1));
+                c.setCodProducto(rs.getString(2));
+                c.setCanProductos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPrecio_compra_sin_iva(rs.getDouble(5));
+                c.setPrecio_compra_con_iva(rs.getDouble(6));
+                c.setPrecio_mayorista(rs.getDouble(7));
+                c.setPrecio_cliente_fijo(rs.getDouble(8));
+                c.setPrecio_cliente_normal(rs.getDouble(9));
+                c.setFecha_caducidad(rs.getDate(10));
+                c.setFecha_registro(rs.getDate(11));
+                c.setFecha_actualizacion(rs.getDate(12));
+                listaInventario.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return listaInventario;
+    }
+
+    public Inventario ObtenerInventarioconId(int codigo) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Inventario c = null;
+        String sql = "SELECT * FROM bdejercicio1.inventario where codigo_prod like '%" + codigo + "%';";
+        try {
+            co = new Conexion().conectarBaseDatos();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Inventario();
+                c.setIdInventario(rs.getInt(1));
+                c.setCodProducto(rs.getString(2));
+                c.setCanProductos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPrecio_compra_sin_iva(rs.getDouble(5));
+                c.setPrecio_compra_con_iva(rs.getDouble(6));
+                c.setPrecio_mayorista(rs.getDouble(7));
+                c.setPrecio_cliente_fijo(rs.getDouble(8));
+                c.setPrecio_cliente_normal(rs.getDouble(9));
+                c.setFecha_caducidad(rs.getDate(10));
+                c.setFecha_registro(rs.getDate(11));
+                c.setFecha_actualizacion(rs.getDate(12));
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return c;
     }
 }

@@ -33,6 +33,11 @@ public class Proveedores {
     public Proveedores() {
     }
 
+    public Date fechaderegistro() {
+        fecha_registro = new Date(fecha_registro.getYear(), fecha_registro.getMonth(), fecha_registro.getDay());
+        return fecha_registro;
+    }
+
     public int getIdProveedores() {
         return idProveedores;
     }
