@@ -1,26 +1,26 @@
 package com.istloja.modelTablas;
 
-import com.istloja.modelo.Inventario;
 import com.istloja.vistas.GestionContable;
-import java.util.List;
 import com.istloja.modelo.NotaVentas;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ModelTableNotaVentas extends AbstractTableModel {
 
     private String[] m_colNames = {"CANTIDAD", "DESCRIPCIÓN", "SUBTOTAL", "TOTAL"};
-    private List<NotaVentas> ventas;
-    private GestionContable gContable;
+    public List<NotaVentas> productoP;
+
     private ComunicacionVistaModelosTablas comunicacionPersona;
     private GestionContable gestionContable;
 
-    public ModelTableNotaVentas(List<Inventario> obtenerProductosInventario, GestionContable aThis) {
-
+    public ModelTableNotaVentas(List<NotaVentas> productosv, GestionContable gestionContable) {
+        this.productoP = productosv;
+        this.gestionContable = gestionContable;
     }
 
     @Override
     public int getRowCount() {
-        return ventas.size();
+        return productoP.size();
     }
 
     @Override
@@ -30,16 +30,16 @@ public class ModelTableNotaVentas extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Inventario inventarios = Inventario.get(rowIndex);
+        NotaVentas p = productoP.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return gestionContable.cantidadproductoVenta();
+                return p.getCantidadProducto();
             case 1:
-                return inventarios.getDescripcion();
+                return p.getDescripcion();
             case 2:
-                return inventarios.getPrecio_cliente_normal();
+                return p.getSubTotal();
             case 3:
-                return gestionContable.cantidadproductoVenta() * inventarios.getPrecio_cliente_normal();
+                return p.getTotal();
         }
         return new String();
     }
@@ -47,6 +47,19 @@ public class ModelTableNotaVentas extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return m_colNames[column];
+    }
 
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        gestionContable.clickProductoEnVentas(productoP.get(rowIndex));
+        return super.isCellEditable(rowIndex, columnIndex);
+    }
+
+    public List<NotaVentas> getProductov() {
+        return productoP;
+    }
+
+    public void setProductov(List<NotaVentas> productov) {
+        this.productoP = productov;
     }
 }

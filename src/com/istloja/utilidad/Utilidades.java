@@ -72,7 +72,7 @@ public class Utilidades {
     //Metodo para validar la correo electronico
     public boolean validarCorreo(String correo) {
         for (int i = 0; i < correo.length(); i++) {
-            System.out.println(correo.charAt(i));
+//            System.out.println(correo.charAt(i));
             if (correo.charAt(i) == '@') {
                 return true;
             }
@@ -94,5 +94,9 @@ public class Utilidades {
     public String devolverFecha(Date fecha) {
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
         return f.format(fecha);
+    }
+
+    public double dosDecimales(double valor) {
+        return Math.round(valor * 100.0) / 100.0;
     }
 }

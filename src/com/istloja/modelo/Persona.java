@@ -11,13 +11,13 @@ public class Persona {
     private String apellidos;
     private String direccion;
     private String correo;
-    private String telefono;
+    private int telefono;
     private Date fecha_registro;
     private int genero;
     private Date fecha_actualizacion;
     private Date fecha_nacimiento;
 
-    public Persona(int idPersona, String cedula, String nombres, String apellidos, String direccion, String correo, String telefono, Date fecha_registro, int genero, Date fecha_actualizacion) {
+    public Persona(int idPersona, String cedula, String nombres, String apellidos, String direccion, String correo, int telefono, Date fecha_registro, int genero, Date fecha_actualizacion, Date fecha_nacimiento) {
         this.idPersona = idPersona;
         this.cedula = cedula;
         this.nombres = nombres;
@@ -28,9 +28,18 @@ public class Persona {
         this.fecha_registro = fecha_registro;
         this.genero = genero;
         this.fecha_actualizacion = fecha_actualizacion;
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
     public Persona() {
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
     public DateTimeFormatter fechaderegistro() {
@@ -88,14 +97,6 @@ public class Persona {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public Date getFecha_registro() {

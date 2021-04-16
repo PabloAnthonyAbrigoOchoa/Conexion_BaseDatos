@@ -151,7 +151,7 @@ public class GestionPersonas {
         persona.setApellidos(txtApellidos.getText());
         persona.setDireccion(txtDireccion.getText());
         persona.setCorreo(txtCorreo.getText());
-        persona.setTelefono(txtTelefono.getText());
+        persona.setTelefono(Integer.parseInt(txtTelefono.getText()));
         persona.setGenero(jcbGenero.getSelectedIndex());
 
         if (isEditar) {

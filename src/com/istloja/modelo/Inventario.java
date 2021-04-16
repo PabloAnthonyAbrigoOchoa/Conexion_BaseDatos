@@ -21,6 +21,16 @@ public class Inventario {
     private Date fecha_registro;
     private Date fecha_actualizacion;
 
+    private int cantidadDeProductoParaVenta;
+
+    public int getCantidadDeProductoParaVenta() {
+        return cantidadDeProductoParaVenta;
+    }
+
+    public void setCantidadDeProductoParaVenta(int cantidadDeProductoParaVenta) {
+        this.cantidadDeProductoParaVenta = cantidadDeProductoParaVenta;
+    }
+
     public Inventario(int idInventario, String codProducto, String canProductos, String descripcion, double precio_compra_sin_iva, double precio_compra_con_iva, double precio_mayorista, double precio_cliente_fijo, double precio_cliente_normal, Date fecha_caducidad, Date fecha_registro, Date fecha_actualizacion) {
         this.idInventario = idInventario;
         this.codProducto = codProducto;
@@ -34,6 +44,7 @@ public class Inventario {
         this.fecha_caducidad = fecha_caducidad;
         this.fecha_registro = fecha_registro;
         this.fecha_actualizacion = fecha_actualizacion;
+
     }
 
     public Inventario() {

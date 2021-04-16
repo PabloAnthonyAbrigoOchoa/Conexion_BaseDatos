@@ -70,7 +70,7 @@ public class ModelTableInventario extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        gContable.clickInventario(inventario.get(rowIndex));
+        gestionContable.clickInventario(inventario.get(rowIndex));
         return super.isCellEditable(rowIndex, columnIndex);
     }
 

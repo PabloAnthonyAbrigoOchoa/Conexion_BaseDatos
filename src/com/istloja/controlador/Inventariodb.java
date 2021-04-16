@@ -221,13 +221,13 @@ public class Inventariodb {
         return listaInventario;
     }
 
-    public Inventario ObtenerInventarioconId(int codigo) {
+    public Inventario ObtenerInventarioconId(String codigo) {
         Connection co = null;
         Statement stm = null;
         //Sentencia de JDBC para obtener valores de la base de datos.
         ResultSet rs = null;
         Inventario c = null;
-        String sql = "SELECT * FROM bdejercicio1.inventario where codigo_prod like '%" + codigo + "%';";
+        String sql = "SELECT * FROM bdejercicio1.inventario where cod_producto like '%" + codigo + "%';";
         try {
             co = new Conexion().conectarBaseDatos();
             stm = co.createStatement();

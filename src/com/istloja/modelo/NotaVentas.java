@@ -1,96 +1,57 @@
 package com.istloja.modelo;
 
-import java.sql.Date;
-
 public class NotaVentas {
 
-    private int idNotaVenta;
-    private String numeroNotaVenta;
-    private int personaIdPersona;
-    private Date fechaVenta;
-    private Double subTotal;
-    private Double iva;
-    private Double totalVenta;
-    private int tipoPago;
+    private int cantidadProducto;
+    private String descripcion;
+    private double subTotal;
+    private double total;
 
-    public NotaVentas(int idNotaVenta, String numeroNotaVenta, int personaIdPersona, Date fechaVenta, Double subTotal, Double iva, Double totalVenta, int tipoPago) {
-        this.idNotaVenta = idNotaVenta;
-        this.numeroNotaVenta = numeroNotaVenta;
-        this.personaIdPersona = personaIdPersona;
-        this.fechaVenta = fechaVenta;
+    public NotaVentas(int cantidadProducto, String descripcion, double subTotal, double total) {
+        this.cantidadProducto = cantidadProducto;
+        this.descripcion = descripcion;
         this.subTotal = subTotal;
-        this.iva = iva;
-        this.totalVenta = totalVenta;
-        this.tipoPago = tipoPago;
+        this.total = total;
     }
 
-    public int getIdNotaVenta() {
-        return idNotaVenta;
+    public NotaVentas() {
     }
 
-    public void setIdNotaVenta(int idNotaVenta) {
-        this.idNotaVenta = idNotaVenta;
+    public int getCantidadProducto() {
+        return cantidadProducto;
     }
 
-    public String getNumeroNotaVenta() {
-        return numeroNotaVenta;
+    public void setCantidadProducto(int cantidadProducto) {
+        this.cantidadProducto = cantidadProducto;
     }
 
-    public void setNumeroNotaVenta(String numeroNotaVenta) {
-        this.numeroNotaVenta = numeroNotaVenta;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public int getPersonaIdPersona() {
-        return personaIdPersona;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public void setPersonaIdPersona(int personaIdPersona) {
-        this.personaIdPersona = personaIdPersona;
-    }
-
-    public Date getFechaVenta() {
-        return fechaVenta;
-    }
-
-    public void setFechaVenta(Date fechaVenta) {
-        this.fechaVenta = fechaVenta;
-    }
-
-    public Double getSubTotal() {
+    public double getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(Double subTotal) {
+    public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
     }
 
-    public Double getIva() {
-        return iva;
+    public double getTotal() {
+        return total;
     }
 
-    public void setIva(Double iva) {
-        this.iva = iva;
-    }
-
-    public Double getTotalVenta() {
-        return totalVenta;
-    }
-
-    public void setTotalVenta(Double totalVenta) {
-        this.totalVenta = totalVenta;
-    }
-
-    public int getTipoPago() {
-        return tipoPago;
-    }
-
-    public void setTipoPago(int tipoPago) {
-        this.tipoPago = tipoPago;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override
     public String toString() {
-        return "NotaVentas{" + "idNotaVenta=" + idNotaVenta + ", numeroNotaVenta=" + numeroNotaVenta + ", personaIdPersona=" + personaIdPersona + ", fechaVenta=" + fechaVenta + ", subTotal=" + subTotal + ", iva=" + iva + ", totalVenta=" + totalVenta + ", tipoPago=" + tipoPago + '}';
+        return "NotaVentas{" + "cantidadProducto=" + cantidadProducto + ", descripcion=" + descripcion + ", subTotal=" + subTotal + ", total=" + total + '}';
     }
 
 }

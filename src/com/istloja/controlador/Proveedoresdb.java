@@ -22,7 +22,7 @@ public class Proveedoresdb {
         boolean registrar = false;
         Statement stm = null;//Interfaz de acceso a la base de datos
         Connection con = null;//COnexion con la base de datos
-        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`,`direccion`,`fecha_registro`,`fecha_vencimiento_deuda`) VALUES ('" + proveedor.getRuc() + "', '" + proveedor.getRazonSocial() + "', '" + proveedor.getTipoActividad() + "', '" + proveedor.getNombreRepresentanteLegal() + "', '" + proveedor.getApellidoRepresentanteLegal() + "', '" + proveedor.getTelefono() + "', '" + proveedor.getCorreo() + "','" + proveedor.getDireccion() + "','" + proveedor.getFecha_registro() + "','" + proveedor.getFechaVencimientoDeuda() + "')";
+        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`,`direccion`,`fecha_registro`,`fecha_vencimiento_deuda`) VALUES ('" + proveedor.getRuc() + "', '" + proveedor.getRazonSocial() + "', '" + proveedor.getTipoActividad() + "', '" + proveedor.getNombreRepresentanteLegal() + "', '" + proveedor.getApellidoRepresentanteLegal() + "', '" + proveedor.getTelefono() + "', '" + proveedor.getCorreo() + "','" + proveedor.getDireccion() + "','" + proveedor.getFecha_registro() + "','" + proveedor.getFechaVencimientoDeuda() + "');";
         try {
             //Instancia de la conexion previamente creada
             Conexion conexion = new Conexion();
